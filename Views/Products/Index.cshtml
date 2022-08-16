@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Prog_Farm_Stall_MVC_Final.Models.Product>
+
+@{
+    ViewData["Title"] = "List Of Products";
+    Layout = "~/Views/Shared/_FarmerLayout.cshtml";
+
+}
+
+<h1>List of Products</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<div class="col-4 p-0 justify-content-end">
+    <form asp-controller="Products" asp-action="Index" autocomplete="off">
+
+        <span class="btn-group">
+
+            <input class="form-control" type="text" name="SearchText" placeholder="Search by Product Description">
+
+            <input class="p-1 m1-2 btn btn-sm btn-info" type="submit" value="Search" />
+
+        </span>
+
+    </form>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+        
+            <th>
+                Farmer
+            </th>
+            <th>
+                Product
+            </th>
+            <th>
+                Description
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductFarmerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductDescription)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ProductId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
